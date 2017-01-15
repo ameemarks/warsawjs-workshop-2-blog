@@ -72,7 +72,7 @@
 
             //tworzenie nowego posta w localStorage
             try {
-                const id = posts.map(v => v.id).sort().pop();  //uzyskujemy najwyższe id obiektu w tablicy obiektów
+                const id = posts.map(v => v.id).sort().pop() + 1;  //uzyskujemy najwyższe id obiektu w tablicy obiektów
                 //data.id = id;
                 newData = Object.assign(data, { id }); //kopiuję properties z obiekty data i dorzucam id
                 posts.push(newData);
