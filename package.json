@@ -1,0 +1,23 @@
+{
+  "name": "warsawjs-workshop-2-blog",
+  "version": "1.0.0",
+  "description": "WarsawJS workshop #2 blog",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node_modules/.bin/simple-mock-http-server -o"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ameemarks/warsawjs-workshop-2-blog.git"
+  },
+  "author": "Anna Grochola",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ameemarks/warsawjs-workshop-2-blog/issues"
+  },
+  "homepage": "https://github.com/ameemarks/warsawjs-workshop-2-blog#readme",
+  "devDependencies": {
+    "simple-mock-http-server": "^1.0.1"
+  }
+}
