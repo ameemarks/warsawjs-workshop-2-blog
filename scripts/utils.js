@@ -18,9 +18,9 @@
         if (!cond) throw new Error(msg || 'AssertionError');
     }
 
-    function makeRequest(url, callback) {
+    function makeRequest(url, method, data, callback) {
         let xhr = new XMLHttpRequest();
-        xhr.open('GET', url);
+        xhr.open(method, url);
         xhr.addEventListener('load', () => {
             callback(xhr.response);
         });
