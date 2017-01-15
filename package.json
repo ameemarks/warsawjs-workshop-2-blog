@@ -19,5 +19,8 @@
   "homepage": "https://github.com/ameemarks/warsawjs-workshop-2-blog#readme",
   "devDependencies": {
     "simple-mock-http-server": "^1.0.1"
+  },
+  "dependencies": {
+    "navigo": "^4.0.0"
   }
 }

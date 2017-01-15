@@ -7,7 +7,7 @@
         constructor (data) {
 
             //dobrze, żeby w modelu były nie tylko dane, ale i walidacja, dlatego asercja
-            asert(typeof data.id === 'number'); //asercja, wykorzystywana w testach jedn.; pierwszym argumentem musi by prawada, jeśli tak jest, to nic się nie dzieje
+            assert(typeof data.id === 'number'); //asercja, wykorzystywana w testach jedn.; pierwszym argumentem musi by prawada, jeśli tak jest, to nic się nie dzieje
             //jeśli dane są niezgodne z modelem, który założyliśmy, to ma wywalić błąd, obsłużyć wyjatek
             assert(typeof data.title === 'string');
             assert(typeof data.body === 'string');

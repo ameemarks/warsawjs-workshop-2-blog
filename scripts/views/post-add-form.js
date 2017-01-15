@@ -1,12 +1,12 @@
 (function (root) {
     'use strict';
 
-    let runtime = root.blog.runtime;
-    let removeHTMLTags = root.blog.utils.removeHTMLTags;
+    let runtime = root.blog.runtime;        //event Emiter
+    let removeHTMLTags = root.blog.utils.removeHTMLTags;        //oczyszczanie danych, które przekazuje użytkownik poprzez zabezpieczenie cross site scripting
 
     class AddPostFormView {
         constructor() {
-            this.$addButton = document.querySelector('#js-display-form-add-post');
+            this.$addButton = document.querySelector('#js-display-form-add-post');  //z $ wprost pobrane z DOM
             this.$addPostForm = document.querySelector('#js-post-add-form');
 
 
@@ -23,26 +23,26 @@
             this.$deleteBtn.addEventListener('click', this.onDelete.bind(this));
         }
 
-        toggleDisplayForm() {
+        toggleDisplayForm() {   //metoda wywoływana po kliknięciu na button
             this.$addPostForm.classList.toggle('hide');
             this.loadDataToForm({ id: '', title: '', body: '' });
             this.clearUrlHash();
         }
 
-        getFormData() {
-            let title = removeHTMLTags(this.$title.value);
+        getFormData() { //metoda, która pobiera dane z formularza
+            let title = removeHTMLTags(this.$title.value);  //value inputa przepuszczamy przez funckję czyszczącą z tagów html
             let body = removeHTMLTags(this.$body.value);
             let id = Number(this.$id.value);
 
-            return { id, title, body };
+            return { id, title, body }; //prosty obiekt z oczyszczonymi danymi
         }
 
         loadDataToForm(post) {
             this.$title.value = post.title;
             this.$body.value = post.body;
             this.$id.value = post.id;
-            if(post.id) {
-                this.$addPostForm.classList.remove('hide');
+            if(post.id) {   //jeśli mamy zapisane id, tzn., że post jest utworzony
+                this.$addPostForm.classList.remove('hide'); //operacje na buttonie submit
                 this.$deleteBtn.classList.remove('hide');
                 this.$submitBtn.value = 'Zapisz post';
                 this.$formTitle.innerHTML = 'Zmień post';
@@ -54,19 +54,19 @@
         }
 
         onSubmit(evt) {
-            evt.preventDefault();
+            evt.preventDefault();       //nie chcemy przeładowania strony
 
-            const formData = this.getFormData();
+            const formData = this.getFormData();    //zapamiętujemy wcześniej pobrane dane
 
-            if(formData.id) {
-                runtime.emit('edit-post', formData);
-            } else {
-                runtime.emit('new-post', formData);
+            if(formData.id) {   //sprawdzamy, czy jest w trakcie edycji posta
+                runtime.emit('edit-post', formData);    //generujemy customowy event (o nazwie edit post, dowolny string) i przekazujemy sczytane dane z formularza; metoda biblioteki event emiter
+            } else {    //jak nie ma id, to generujemy
+                runtime.emit('new-post', formData);     //obsługę tych zdarzeń robimy w controllerze, ale nie przypinamy do interface DOM
             }
 
-            this.toggleDisplayForm();
-            this.clearInputs();
-            this.clearUrlHash();
+            this.toggleDisplayForm();   //ukrywamy formularz
+            this.clearInputs();         //czyścimy inputy
+            this.clearUrlHash();        //czyścimy hash url
         }
 
         onDelete() {
@@ -78,11 +78,11 @@
         }
 
         clearInputs() {
-            this.$title.value = this.$body.value = '';
+            this.$title.value = this.$body.value = this.$id.value = ''; //czyszczenie inputów
         }
 
         clearUrlHash() {
-            history.pushState("", document.title, window.location.pathname + window.location.search);
+            history.pushState("", document.title, window.location.pathname + window.location.search); //czyszczenie url z hasha
         }
     }
 
